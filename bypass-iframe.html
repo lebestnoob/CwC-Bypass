@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bypass Web Browing Restrictions (Alternative)</title>
+    <meta name="description" content="Bypass Web Browsing Restrictions using Coding with Chrome (Alternative)">
+    <meta name="keywords" content="Bypass, School, Unblock, Restriction, Internet, Free, Securly, GoGuardian, iBoss">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            background-color: transparent;
+            text-shadow: 0px 0px 5px #000;
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://bing-wallpaper.lebestboob.repl.co/?resolution=1920&format=image&index=0&mkt=en-US') no-repeat center fixed;
+            background-size: cover;
+        }
+        
+        html {
+            overflow: auto;
+        }
+        
+        html,
+        body,
+        iframe {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+        
+        iframe,
+        div {
+            display: block;
+            width: 100%;
+            border: none;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: white;
+        }
+        
+        a:link {
+            color: blue;
+        }
+        
+        a:visited {
+            color: green;
+        }
+        
+        a:hover {
+            color: green;
+        }
+        
+        a:active {
+            color: blue;
+        }
+        
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+        
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+        
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: gray;
+            overflow-wrap: break-word;
+        }
+        
+        input:focus,
+        button:focus {
+            border: 2px solid LightBlue !important;
+            box-shadow: 0 0 3px LightBlue !important;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus,
+        button:focus {
+            outline-offset: 0px !important;
+            outline: none !important;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4 {
+            padding-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <noscript>
+        You must have javascript enabled for this to work!
+      </noscript>
+    </h1>
+    <label style="display: flex;
+  align-items: center;"> URL/Search:</label>
+    <input style="border-radius: 5px; border-style: hidden;" type="text" placeholder="Search or type a URL" id="url">
+    <button style="border-radius: 5px; border-style: hidden;" type="button" id="go" onclick="getInputValue();">Go</button>
+    <hr>
+    <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
+    <div style="background-color: transparent;" id="page" frameborder='0' marginheight='0' marginwidth='0' width='100%' height='100%' scrolling='auto'>
+        <h1>
+            URLs must include http(s), anything else will be counted as a search.
+        </h1>
+        <hr>
+        <button class="accordion">1. Information</button>
+        <div class="panel">
+            <ul style="color:white; text-shadow: 0px 0px 5px #000;">
+                <li><a href="https://www.startpage.com"><i>Startpage</i></a> is a search engine that uses Google results. The only reason this is being used is because Google does not load using this method. This is the most usable one, so far.</li>
+                <li>Resizing or reloading this page will send you back here, unlike the other one.</li>
+                <li>It is recommended to run this HTML file inside of <a href="https://chrome.google.com/webstore/detail/coding-with-chrome/becloognjehhioodmnimnehjcibkloed"><i>Coding with Chrome</i></a>, but it may work outside of it, for some people.</li>
+                <li>Not all websites are supported using this method, some might not load or display correctly.</li>
+            </ul>
+        </div>
+        <hr>
+        <h3>
+            You are responsible for any trouble you may get into by using this.
+        </h3>
+        <br>
+        <h4>
+            Image Credit:
+            <br>
+            <iframe style="border: none; background-color: transparent;" width="300" height="150" scrolling="no" frameborder="0" src="https://www.rssdog.com/index.php?url=http%3A%2F%2Fwww.bing.com%2FHPImageArchive.aspx%3Fformat%3Drss%26idx%3D0%26n%3D1%26mkt%3Den-US&mode=html&showonly=&maxitems=0&showdescs=0&desctrim=0&descmax=0&tabwidth=100%25&nofollow=1&linktarget=_blank&fullhtml=1&bordercol=transparent&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000&ctl=0"></iframe>
+        </h4>
+    </div>
+    <script>
+        var input = document.getElementById("url");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("go").click();
+            }
+        });
+
+        function getInputValue() {
+            document.getElementsByTagName("div")[0].setAttribute("style", "background-color: white; margin: 0px; padding: 0px; height: 100%; border: none;");
+            let domain = "http";
+            var inputVal = document.getElementById("url").value;
+            if (inputVal.includes(domain)) {
+                console.log("Redirecting to " + inputVal);
+                document.getElementById("page").innerHTML = "<iframe style='border: none;' id='0' is='x-frame-bypass' src='" + inputVal + "'frameborder='0' marginheight='0' marginwidth='0' width='100%' height='100%' scrolling='auto' sandbox='allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation'></iframe>"
+            } else {
+                console.log("Searching for " + inputVal);
+                document.getElementById("page").innerHTML = "<iframe style='border: none;' id='0' is='x-frame-bypass' src='https://www.startpage.com/do/dsearch?query=" + inputVal + "'frameborder='0' marginheight='0' marginwidth='0' width='100%' height='100%' scrolling='auto' sandbox'allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation'></iframe>";
+            }
+        }
+
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
