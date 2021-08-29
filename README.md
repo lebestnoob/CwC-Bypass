@@ -1,4 +1,4 @@
-# cwc-bypass
+# CWC Bypass
 Bypass extension level site restrictions using Coding with Chrome
 
 # Download
