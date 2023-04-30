@@ -1,259 +1,290 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://title.mihir.ch/" />
+		<link rel="preconnect" href="https://www.google.com/" />
+		<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+		<script
+			src="https://cdn.jsdelivr.net/npm/psl@1.9.0/dist/psl.min.js"
+			integrity="sha256-pGXYc481WIYNZUsKubKxCxQUydhNrlM5S8g5eMU8fdw="
+			crossorigin="anonymous"></script>
+		<title>CwC Bypass</title>
+		<style>
+			.warn {
+				color: red;
+			}
+			main {
+				text-align: center;
+			}
+			input {
+				width: 80%;
+			}
+			.list {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				max-width: 95vw;
+				justify-content: space-evenly;
+			}
+			.list > div {
+				display: flex;
+				flex-direction: column;
+				max-width: 8em;
+			}
+			#loading {
+				font-size: 30px;
+			}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bypass Web Browsing Restrictions</title>
-    <meta name="description" content="Bypass Web Browsing Restrictions using Coding with Chrome">
-    <meta name="keywords" content="Bypass, School, Unblock, Restriction, Internet, Free, Securly, GoGuardian, iBoss">
-    <style>
-        /* This belongs to bypass.html */
-        
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
-        body {
-            font-family: 'Open Sans', sans-serif;
-            color: white;
-            text-shadow: 0px 0px 5px #000;
-            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://bing-wallpaper.lebestboob.repl.co/?resolution=1920&format=image&index=0&mkt=en-US');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        a:link {
-            color: red;
-        }
-        
-        a:visited {
-            color: green;
-        }
-        
-        a:hover {
-            color: hotpink;
-        }
-        
-        a:active {
-            color: blue;
-        }
-        
-        .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            transition: 0.4s;
-        }
-        
-        .active,
-        .accordion:hover {
-            background-color: #ccc;
-        }
-        
-        .panel {
-            padding: 0 18px;
-            display: none;
-            background-color: gray;
-            overflow: hidden;
-        }
-        
-        .alert {
-            padding: 20px;
-            background-color: #f44336;
-            color: white;
-            opacity: 1;
-            transition: opacity 0.6s;
-            margin-bottom: 15px;
-        }
-        
-        .alert.success {
-            background-color: #4CAF50;
-        }
-        
-        .alert.warning {
-            background-color: #ff9800;
-        }
-        
-        .closebtn {
-            margin-left: 15px;
-            color: white;
-            font-weight: bold;
-            float: right;
-            font-size: 22px;
-            line-height: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        
-        .closebtn:hover {
-            color: black;
-        }
-        
-        html {
-            overflow: auto;
-        }
-        
-        iframe {
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
-        }
-        
-        iframe {
-            display: block;
-            width: 100%;
-            border: none;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        
-        input:focus,
-        button:focus {
-            border: 2px solid LightBlue !important;
-            box-shadow: 0 0 3px LightBlue !important;
-        }
-        
-        input:focus,
-        textarea:focus,
-        select:focus,
-        button:focus {
-            outline-offset: 0px !important;
-            outline: none !important;
-        }
-    </style>
-</head>
+			#loading:after {
+				overflow: hidden;
+				display: inline-block;
+				vertical-align: bottom;
+				-webkit-animation: ellipsis steps(4, end) 900ms infinite;
+				animation: ellipsis steps(4, end) 900ms infinite;
+				content: "\2026"; /* ascii code for the ellipsis character */
+				width: 0px;
+			}
 
-<body>
-    <div id="w" class="alert success">
-        <span class="closebtn">&times;</span>
-        <strong>Success!</strong> <i>Coding with Chrome</i> has been detected.
-    </div>
-    <div id="s" class="alert warning">
-        <span class="closebtn">&times;</span>
-        <strong>Warning!</strong> You are not running this inside of <i>Coding with Chrome</i>.
-    </div>
-    <h1>
-        <noscript>
-    You must have javascript enabled for this to work!
-</noscript>
-    </h1>
-    <h1>
-        You will be redirected to <a href="https://www.google.com"><i>Google</i></a> in <span id="counter">15</span> seconds.
-    </h1>
-    <label style="display: flex;
-  align-items: center;"> URL/Search:</label>
-    <input style="border-radius: 5px; border-style: hidden;" type="text" placeholder="Search or type a URL" id="url">
-    <button style="border-radius: 5px; border-style: hidden;" type="button" id="go" onclick="getInputValue();">Go</button>
-    <h3>
-        URLs needs to have http(s), if it doesn't it wil be treated as a search.
-    </h3>
-    <hr>
-    <button class="accordion">1. Getting Started</button>
-    <div class="panel">
-        <p>
-            You need to run this HTML inside of <a href="https://chrome.google.com/webstore/detail/coding-with-chrome/becloognjehhioodmnimnehjcibkloed"><i>Coding with Chrome</i></a>. If you can't install the extention, this method will not work.
-        </p>
-    </div>
-    <br>
-    <br>
-    <button class="accordion">2. Information</button>
-    <div class="panel">
-        <ul style="color:white; text-shadow: 0px 0px 5px #000;">
-            <li>This will only work on <mark style="color: white;">browser</mark> level restrictions. System or network level restrictions will not work because all web traffic will be routed to the web filter.</li>
-            <li>There is no <i>back</i> or <i>search</i> button. The way this method is implemented does not allow them to exist, however this has the most webpage compatability.</li>
-        </ul>
-    </div>
-    <hr>
-    <h3>
-        You are responsible for any trouble you may get into by using this.
-    </h3>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h4>
-        Image Credit:
-        <br>
-        <iframe style="border: none; background-color: transparent;" width="300" height="150" scrolling="no" frameborder="0" src="https://www.rssdog.com/index.php?url=http%3A%2F%2Fwww.bing.com%2FHPImageArchive.aspx%3Fformat%3Drss%26idx%3D0%26n%3D1%26mkt%3Den-US&mode=html&showonly=&maxitems=0&showdescs=0&desctrim=0&descmax=0&tabwidth=100%25&nofollow=1&linktarget=_blank&fullhtml=1&bordercol=transparent&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000&ctl=0"></iframe>
-    </h4>
-    <script>
-        var input = document.getElementById("url");
-        input.addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("go").click();
-            }
-        });
+			@keyframes ellipsis {
+				to {
+					width: 1.25em;
+				}
+			}
 
-        function getInputValue() {
-            let domain = "http";
-            var inputVal = document.getElementById("url").value;
-            if (inputVal.includes(domain)) {
-                console.log("Redirecting to " + inputVal);
-                window.location.replace(inputVal)
-            } else {
-                console.log("Searching for " + inputVal);
-                window.location.replace("https://www.google.com/search?q=" + inputVal);
-            }
-        }
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+			@-webkit-keyframes ellipsis {
+				to {
+					width: 1.25em;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>CwC Bypass</h1>
+			<p>
+				Bypass browser level internet restrictions by using Coding with Chrome
+			</p>
+		</header>
+		<main>
+			<p class="notice, warn" style="display: none">
+				<b>Warning!</b><br />
+				You are not using Coding with Chrome!
+			</p>
+			<input
+				type="url"
+				id="search"
+				placeholder="Search or type a URL"
+				onkeyup="searchBoxinput();" />
+			<button type="button" id="submit" disabled onclick="browse();">Go</button>
+			<section>
+				<h3>Bookmarks</h3>
+				<p id="bookmark-info">Limit of 25 bookmarks</p>
+				<p id="loading">Loading bookmarks</p>
+				<div class="list"></div>
+				<button
+					type="button"
+					id="add"
+					style="--accent: green"
+					onclick="addBookmark();">
+					Add
+				</button>
+				<input
+					type="url"
+					id="boomarkInput"
+					style="display: none"
+					placeholder="URL"
+					onkeyup="BookmarkInput();" />
+				<button
+					type="button"
+					id="bookmarkSave"
+					style="display: none"
+					disabled
+					onclick="saveBookmark();">
+					Done
+				</button>
+				<button
+					type="button"
+					id="bookmarkClear"
+					style="display: none"
+					onclick="clearAllBookmark();">
+					Clear All Bookmarks
+				</button>
+			</section>
+		</main>
+	</body>
+	<script async>
+		const siteStorage = localStorage.getItem("_cwcbypass.bookmarks");
+		const siteArray = JSON.parse(siteStorage) || [];
 
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-        setInterval(function() {
-            var div = document.querySelector("#counter");
-            var count = div.textContent * 1 - 1;
-            div.textContent = count;
-            if (count <= 0) {
-                window.location.replace("https://www.google.com");
-            }
-        }, 1000);
-        if (navigator.userAgent == 'CwC sandbox') {
-            console.log('You\'re using Coding with Chrome');
-            var x = document.getElementById("s");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-        var close = document.getElementsByClassName("closebtn");
-        var i;
+		async function fetchWithTimeout(resource, options = {}) {
+			const { timeout = 2000 } = options;
 
-        for (i = 0; i < close.length; i++) {
-            close[i].onclick = function() {
-                var div = this.parentElement;
-                div.style.opacity = "0";
-                setTimeout(function() {
-                    div.style.display = "none";
-                }, 300);
-            }
-        }
-        if (navigator.userAgent !== 'CwC sandbox') {
-            console.log('Coding with Chrome was not detected');
-            var x = document.getElementById("w");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-    </script>
-</body>
+			const controller = new AbortController();
+			const id = setTimeout(() => controller.abort(), timeout);
 
+			const response = await fetch(resource, {
+				...options,
+				signal: controller.signal,
+			});
+			clearTimeout(id);
+
+			return response;
+		}
+
+		if (navigator.userAgent !== "CwC sandbox") {
+			console.warn("Coding with Chrome was not detected!");
+			const x = document.querySelector(".warn");
+			x.style.display = "";
+		}
+
+		const searchbox = document.querySelector("#search");
+		const submit = document.querySelector("#submit");
+		const addBookmarkBtn = document.querySelector("#add");
+		const bookmarkInput = document.querySelector("#boomarkInput");
+		const bookmarkSaveBtn = document.querySelector("#bookmarkSave");
+		const bookmarkClearBtn = document.querySelector("#bookmarkClear");
+		const bookmarksDIV = document.querySelector(".list");
+		const loading = document.querySelector("#loading");
+		const bookmarkInfo = document.querySelector("#bookmark-info");
+
+		searchbox.addEventListener("keypress", function (event) {
+			if (event.key === "Enter") {
+				event.preventDefault();
+				submit.click();
+			}
+		});
+
+		async function browse() {
+			if (
+				searchbox.value.startsWith("https://") ||
+				searchbox.value.startsWith("http://")
+			) {
+				window.location = searchbox.value;
+			} else if (searchbox.value.endsWith("/")) {
+				window.location = `https://${searchbox.value}`;
+			} else if (psl.isValid(searchbox.value)) {
+				window.location = `https://${searchbox.value}`;
+			} else if (searchbox.value) {
+				console.log(`Assuming "${searchbox.value}" as a search`);
+				window.location = `https://www.google.com/search?q=${searchbox.value}`;
+			}
+		}
+
+		async function bookmarksMain(iteration = 0) {
+			if (bookmarksDIV.childElementCount == siteArray.length)
+				loading.style.display = "none";
+			for (let i = iteration; i < siteArray.length; i++) {
+				bookmarkClearBtn.style.display = "";
+				let siteTitle = await fetchWithTimeout(
+					`https://title.mihir.ch/${siteArray[i]}`
+				) // fetch site titles for bookmarks
+					.then((response) => {
+						if (response.ok) {
+							return response.text();
+						}
+					})
+					.catch((e) => {
+						// return site url hostname as name if fetch fails
+						return new URL(siteArray[i]).hostname || siteArray[i];
+					});
+				const href = document.createElement("a");
+				const favicon = new Image();
+				favicon.src = `https://www.google.com/s2/favicons?domain=${siteArray[i]}`; // use google favicons
+				favicon.onerror = function () {
+					favicon.src = `https://api.dicebear.com/6.x/initials/png?seed=${
+						new URL(siteArray[i]).hostname
+					}`;
+				};
+				href.href = siteArray[i];
+				if (siteTitle.length > 10)
+					siteTitle = siteTitle.substring(0, 10) + "...";
+				if (!siteTitle) siteTitle = new URL(siteArray[i]).hostname;
+				const txt = document.createTextNode(
+					siteTitle.replace(/^https?:\/\//, "")
+				);
+				href.append(favicon);
+				href.append(txt);
+				bookmarksDIV.append(href);
+				let btn = document.createElement("button");
+				btn.textContent = "Delete";
+				btn.setAttribute("style", "--accent: #e03d3d; color: black;");
+				btn.onclick = function () {
+					siteArray.splice(i, 1);
+					localStorage.setItem(
+						"_cwcbypass.bookmarks",
+						JSON.stringify(siteArray)
+					);
+					div.remove();
+					i--;
+					if (siteArray.length <= 0) bookmarkClearBtn.style.display = "none";
+					if (siteArray.length < 24) {
+						bookmarkInfo.textContent = "Limit of 25 bookmarks";
+						bookmarkInfo.className = "";
+					}
+				};
+				const div = document.createElement("div");
+				div.append(href);
+				div.append(btn);
+				bookmarksDIV.append(div);
+				if (bookmarksDIV.childElementCount == siteArray.length)
+					loading.style.display = "none";
+			}
+		}
+
+		function addBookmark() {
+			addBookmarkBtn.style.display = "none";
+			bookmarkInput.style.display = "";
+			bookmarkSaveBtn.style.display = "";
+			bookmarkClearBtn.style.display = "none";
+		}
+
+		function saveBookmark() {
+			let input = bookmarkInput.value;
+			if (siteArray.length < 24) {
+				if (input.startsWith("https://") || input.startsWith("http://")) {
+					if (siteArray.includes(input) === false) siteArray.push(input);
+				} else {
+					if (siteArray.includes(`https://${input}`) === false)
+						siteArray.push(`https://${input}`);
+				}
+				localStorage.setItem("_cwcbypass.bookmarks", JSON.stringify(siteArray));
+				bookmarksMain(siteArray.length - 1);
+
+				bookmarkInput.value = "";
+				addBookmarkBtn.style.display = "";
+				bookmarkInput.style.display = "none";
+				bookmarkSaveBtn.style.display = "none";
+				bookmarkSaveBtn.disabled = true;
+			} else {
+				bookmarkInfo.textContent = "Bookmarks full!";
+				bookmarkInfo.className = "warn";
+			}
+		}
+
+		function searchBoxinput() {
+			if (searchbox.value) {
+				submit.disabled = false;
+			} else {
+				submit.disabled = true;
+			}
+		}
+
+		function BookmarkInput() {
+			if (bookmarkInput.value) {
+				bookmarkSaveBtn.disabled = false;
+			} else {
+				bookmarkSaveBtn.disabled = true;
+			}
+		}
+
+		function clearAllBookmark() {
+			bookmarkClearBtn.style.display = "none";
+			localStorage.removeItem("_cwcbypass.bookmarks");
+			location.reload();
+		}
+		bookmarksMain(); // load bookmarks
+	</script>
 </html>

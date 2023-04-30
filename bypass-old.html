@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bypass Web Browsing Restrictions</title>
+    <meta name="description" content="Bypass Web Browsing Restrictions using Coding with Chrome">
+    <meta name="keywords" content="Bypass, School, Unblock, Restriction, Internet, Free, Securly, GoGuardian, iBoss">
+    <style>
+        /* This belongs to bypass.html */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            text-shadow: 0px 0px 5px #000;
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://bing-wallpaper.lebestboob.repl.co/?resolution=1920&format=image&index=0&mkt=en-US');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        a:link {
+            color: red;
+        }
+        
+        a:visited {
+            color: green;
+        }
+        
+        a:hover {
+            color: hotpink;
+        }
+        
+        a:active {
+            color: blue;
+        }
+        
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+        
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+        
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: gray;
+            overflow: hidden;
+        }
+        
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.6s;
+            margin-bottom: 15px;
+        }
+        
+        .alert.success {
+            background-color: #4CAF50;
+        }
+        
+        .alert.warning {
+            background-color: #ff9800;
+        }
+        
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .closebtn:hover {
+            color: black;
+        }
+        
+        html {
+            overflow: auto;
+        }
+        
+        iframe {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+        
+        iframe {
+            display: block;
+            width: 100%;
+            border: none;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        input:focus,
+        button:focus {
+            border: 2px solid LightBlue !important;
+            box-shadow: 0 0 3px LightBlue !important;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus,
+        button:focus {
+            outline-offset: 0px !important;
+            outline: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="w" class="alert success">
+        <span class="closebtn">&times;</span>
+        <strong>Success!</strong> <i>Coding with Chrome</i> has been detected.
+    </div>
+    <div id="s" class="alert warning">
+        <span class="closebtn">&times;</span>
+        <strong>Warning!</strong> You are not running this inside of <i>Coding with Chrome</i>.
+    </div>
+    <h1>
+        <noscript>
+    You must have javascript enabled for this to work!
+</noscript>
+    </h1>
+    <h1>
+        You will be redirected to <a href="https://www.google.com"><i>Google</i></a> in <span id="counter">15</span> seconds.
+    </h1>
+    <label style="display: flex;
+  align-items: center;"> URL/Search:</label>
+    <input style="border-radius: 5px; border-style: hidden;" type="text" placeholder="Search or type a URL" id="url">
+    <button style="border-radius: 5px; border-style: hidden;" type="button" id="go" onclick="getInputValue();">Go</button>
+    <h3>
+        URLs needs to have http(s), if it doesn't it wil be treated as a search.
+    </h3>
+    <hr>
+    <button class="accordion">1. Getting Started</button>
+    <div class="panel">
+        <p>
+            You need to run this HTML inside of <a href="https://chrome.google.com/webstore/detail/coding-with-chrome/becloognjehhioodmnimnehjcibkloed"><i>Coding with Chrome</i></a>. If you can't install the extention, this method will not work.
+        </p>
+    </div>
+    <br>
+    <br>
+    <button class="accordion">2. Information</button>
+    <div class="panel">
+        <ul style="color:white; text-shadow: 0px 0px 5px #000;">
+            <li>This will only work on <mark style="color: white;">browser</mark> level restrictions. System or network level restrictions will not work because all web traffic will be routed to the web filter.</li>
+            <li>There is no <i>back</i> or <i>search</i> button. The way this method is implemented does not allow them to exist, however this has the most webpage compatability.</li>
+        </ul>
+    </div>
+    <hr>
+    <h3>
+        You are responsible for any trouble you may get into by using this.
+    </h3>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h4>
+        Image Credit:
+        <br>
+        <iframe style="border: none; background-color: transparent;" width="300" height="150" scrolling="no" frameborder="0" src="https://www.rssdog.com/index.php?url=http%3A%2F%2Fwww.bing.com%2FHPImageArchive.aspx%3Fformat%3Drss%26idx%3D0%26n%3D1%26mkt%3Den-US&mode=html&showonly=&maxitems=0&showdescs=0&desctrim=0&descmax=0&tabwidth=100%25&nofollow=1&linktarget=_blank&fullhtml=1&bordercol=transparent&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000&ctl=0"></iframe>
+    </h4>
+    <script>
+        var input = document.getElementById("url");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("go").click();
+            }
+        });
+
+        function getInputValue() {
+            let domain = "http";
+            var inputVal = document.getElementById("url").value;
+            if (inputVal.includes(domain)) {
+                console.log("Redirecting to " + inputVal);
+                window.location.replace(inputVal)
+            } else {
+                console.log("Searching for " + inputVal);
+                window.location.replace("https://www.google.com/search?q=" + inputVal);
+            }
+        }
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+        setInterval(function() {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                window.location.replace("https://www.google.com");
+            }
+        }, 1000);
+        if (navigator.userAgent == 'CwC sandbox') {
+            console.log('You\'re using Coding with Chrome');
+            var x = document.getElementById("s");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.opacity = "0";
+                setTimeout(function() {
+                    div.style.display = "none";
+                }, 300);
+            }
+        }
+        if (navigator.userAgent !== 'CwC sandbox') {
+            console.log('Coding with Chrome was not detected');
+            var x = document.getElementById("w");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
