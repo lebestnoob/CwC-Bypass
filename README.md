@@ -5,6 +5,7 @@ Bypass browser level internet restrictions by using Coding with Chrome
 # Download
 
 - [Bypass](https://github.com/lebestnoob/cwc-bypass/raw/main/bypass.html)
+- [Simple](https://github.com/Jokypond/CWC-Bypass-Tweaks/raw/main/simple.html)
 
 - [Bypass No Bookmarks](https://github.com/lebestnoob/cwc-bypass/raw/main/bypass-nobookmarks.html)
 
