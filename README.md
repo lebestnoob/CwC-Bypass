@@ -7,6 +7,8 @@ Bypass browser level internet restrictions by using Coding with Chrome
 - [Bypass](https://github.com/lebestnoob/cwc-bypass/raw/main/bypass.html)
 - [Simple](https://github.com/Jokypond/CWC-Bypass-Tweaks/raw/main/simple.html)
 
+- [Bypass No Bookmarks](https://github.com/lebestnoob/cwc-bypass/raw/main/bypass-nobookmarks.html)
+
 - [Iframe Bypass **(NOT SUPPORTED)**](https://github.com/lebestnoob/cwc-bypass/raw/main/bypass-iframe.html)
 
 Right click and choose `Save link as...`
