@@ -78,6 +78,13 @@
 				id="search"
 				placeholder="Search or type a URL"
 				onkeyup="searchBoxinput();" />
+			<select name="searchEngine" id="searchEngine">
+				<option value="google">Google</option>
+				<option value="bing">Bing</option>
+				<option value="duckduckgo">DuckDuckGo</option>
+				<option value="yahoo">Yahoo</option>
+				<option value="deviantart">DeviantArt</option>
+			</select>
 			<button type="button" id="submit" disabled onclick="browse();">Go</button>
 			<section>
 				<h3>Bookmarks</h3>
@@ -149,6 +156,9 @@
 		const bookmarksDIV = document.querySelector(".list");
 		const loading = document.querySelector("#loading");
 		const bookmarkInfo = document.querySelector("#bookmark-info");
+		const searchEngineInput = document.querySelector("#searchEngine");
+
+		let searchEngine = "www.google.com/search";
 
 		searchbox.addEventListener("keypress", function (event) {
 			if (event.key === "Enter") {
@@ -165,6 +175,13 @@
 		});
 
 		async function browse() {
+			if (searchEngineInput.value === "bing") searchEngine = "bing.com/search";
+			if (searchEngineInput.value === "yahoo")
+				searchEngine = "search.yahoo.com/search";
+			if (searchEngineInput.value === "duckduckgo")
+				searchEngine = "duckduckgo.com/";
+			if (searchEngineInput.value === "deviantart")
+				searchEngine = "youtube.com/watch?v=DLzxrzFCyOs";
 			if (
 				searchbox.value.startsWith("https://") ||
 				searchbox.value.startsWith("http://")
@@ -172,11 +189,11 @@
 				window.location = searchbox.value;
 			} else if (searchbox.value.endsWith("/")) {
 				window.location = `https://${searchbox.value}`;
-			} else if (psl.isValid(searchbox.value)) {
+			} else if (psl?.isValid(searchbox.value)) {
 				window.location = `https://${searchbox.value}`;
 			} else if (searchbox.value) {
 				console.log(`Assuming "${searchbox.value}" as a search`);
-				window.location = `https://www.google.com/search?q=${searchbox.value}`;
+				window.location = `https://${searchEngine}?q=${searchbox.value}`;
 			}
 		}
 
