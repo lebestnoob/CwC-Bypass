@@ -4,8 +4,6 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preconnect" href="https://title.mihir.ch/" />
-		<link rel="preconnect" href="https://www.google.com/" />
 		<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
 		<script
 			src="https://cdn.jsdelivr.net/npm/psl@1.9.0/dist/psl.min.js"
@@ -88,6 +86,7 @@
 		});
 
 		async function browse() {
+			let url = new URL(`https://${searchbox.value}`);
 			if (searchEngineInput.value === "bing") searchEngine = "bing.com/search";
 			if (searchEngineInput.value === "yahoo")
 				searchEngine = "search.yahoo.com/search";
@@ -102,7 +101,7 @@
 				window.location = searchbox.value;
 			} else if (searchbox.value.endsWith("/")) {
 				window.location = `https://${searchbox.value}`;
-			} else if (psl?.isValid(searchbox.value)) {
+			} else if (psl?.isValid(url.hostname)) {
 				window.location = `https://${searchbox.value}`;
 			} else if (searchbox.value) {
 				console.log(`Assuming "${searchbox.value}" as a search`);
