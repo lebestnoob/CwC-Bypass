@@ -2,7 +2,7 @@
 
 Bypass browser level internet restrictions by using Coding with Chrome
 
-# Download
+## Download
 
 - [Bypass No Bookmarks](https://github.com/lebestnoob/cwc-bypass/raw/main/bypass-nobookmarks.html)
 
