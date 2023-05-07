@@ -50,21 +50,6 @@
 		</main>
 	</body>
 	<script async>
-		async function fetchWithTimeout(resource, options = {}) {
-			const { timeout = 2000 } = options;
-
-			const controller = new AbortController();
-			const id = setTimeout(() => controller.abort(), timeout);
-
-			const response = await fetch(resource, {
-				...options,
-				signal: controller.signal,
-			});
-			clearTimeout(id);
-
-			return response;
-		}
-
 		if (navigator.userAgent !== "CwC sandbox") {
 			console.warn("Coding with Chrome was not detected!");
 			const x = document.querySelector(".warn");
