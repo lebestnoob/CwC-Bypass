@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="preconnect" href="https://title.mihir.ch/" />
+		<link rel="preconnect" href="https://www.google.com/" />
+		<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+		<style>
+			body {
+				text-align: center;
+			}
+			.list {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				max-width: 95vw;
+				justify-content: space-evenly;
+			}
+			.list > div {
+				display: flex;
+				flex-direction: column;
+				max-width: 8em;
+			}
+			#loading {
+				font-size: 30px;
+			}
+
+			#loading:after {
+				overflow: hidden;
+				display: inline-block;
+				vertical-align: bottom;
+				-webkit-animation: ellipsis steps(4, end) 900ms infinite;
+				animation: ellipsis steps(4, end) 900ms infinite;
+				content: "\2026"; /* ascii code for the ellipsis character */
+				width: 0px;
+			}
+
+			@keyframes ellipsis {
+				to {
+					width: 1.25em;
+				}
+			}
+
+			@-webkit-keyframes ellipsis {
+				to {
+					width: 1.25em;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h3>Bookmarks</h3>
+		<p id="bookmark-info">Limit of 25 bookmarks</p>
+		<p id="loading">Loading bookmarks</p>
+		<div class="list"></div>
+		<button
+			type="button"
+			id="add"
+			style="--accent: green"
+			onclick="addBookmark();">
+			Add
+		</button>
+		<input
+			type="url"
+			id="boomarkInput"
+			style="display: none"
+			placeholder="URL"
+			onkeyup="BookmarkInput();" />
+		<button
+			type="button"
+			id="bookmarkSave"
+			style="display: none"
+			disabled
+			onclick="saveBookmark();">
+			Done
+		</button>
+		<button
+			type="button"
+			id="bookmarkClear"
+			style="display: none"
+			onclick="clearAllBookmark();">
+			Clear All Bookmarks
+		</button>
+	</body>
+	<script async>
+		const siteStorage = localStorage.getItem("_cwcbypass.bookmarks");
+		const siteArray = JSON.parse(siteStorage) || [];
+
+		async function fetchWithTimeout(resource, options = {}) {
+			const { timeout = 2000 } = options;
+
+			const controller = new AbortController();
+			const id = setTimeout(() => controller.abort(), timeout);
+
+			const response = await fetch(resource, {
+				...options,
+				signal: controller.signal,
+			});
+			clearTimeout(id);
+
+			return response;
+		}
+
+		const addBookmarkBtn = document.querySelector("#add");
+		const bookmarkInput = document.querySelector("#boomarkInput");
+		const bookmarkSaveBtn = document.querySelector("#bookmarkSave");
+		const bookmarkClearBtn = document.querySelector("#bookmarkClear");
+		const bookmarksDIV = document.querySelector(".list");
+		const loading = document.querySelector("#loading");
+		const bookmarkInfo = document.querySelector("#bookmark-info");
+
+		bookmarkInput.addEventListener("keypress", function (event) {
+			if (event.key === "Enter") {
+				event.preventDefault();
+				bookmarkSaveBtn.click();
+			}
+		});
+
+		async function bookmarksMain(iteration = 0) {
+			if (bookmarksDIV.childElementCount == siteArray.length)
+				loading.style.display = "none";
+			for (let i = iteration; i < siteArray.length; i++) {
+				bookmarkClearBtn.style.display = "";
+				let siteTitle = await fetchWithTimeout(
+					`https://title.mihir.ch/${siteArray[i]}`
+				) // fetch site titles for bookmarks
+					.then((response) => {
+						if (response.ok) {
+							return response.text();
+						}
+					})
+					.catch((e) => {
+						// return site url hostname as name if fetch fails
+						return new URL(siteArray[i]).hostname || siteArray[i];
+					});
+				const href = document.createElement("a");
+				const favicon = new Image();
+				favicon.src = `https://www.google.com/s2/favicons?domain=${siteArray[i]}`; // use google favicons
+				favicon.onerror = function () {
+					favicon.src = `https://api.dicebear.com/6.x/initials/png?seed=${
+						new URL(siteArray[i]).hostname
+					}`;
+				};
+				href.href = siteArray[i];
+				if (!siteTitle) siteTitle = new URL(siteArray[i]).hostname;
+				if (siteTitle.includes("Origin DNS"))
+					siteTitle = new URL(siteArray[i]).hostname;
+				if (siteTitle.includes("Forbidden"))
+					siteTitle = new URL(siteArray[i]).hostname;
+				if (siteTitle.length > 10)
+					siteTitle = siteTitle.substring(0, 10) + "...";
+				const txt = document.createTextNode(
+					siteTitle.replace(/^https?:\/\//, "")
+				);
+				href.append(favicon);
+				href.append(txt);
+				bookmarksDIV.append(href);
+				let btn = document.createElement("button");
+				btn.textContent = "Delete";
+				btn.setAttribute("style", "--accent: #e03d3d; color: black;");
+				btn.onclick = function () {
+					siteArray.splice(i, 1);
+					localStorage.setItem(
+						"_cwcbypass.bookmarks",
+						JSON.stringify(siteArray)
+					);
+					div.remove();
+					i--;
+					if (siteArray.length <= 0) bookmarkClearBtn.style.display = "none";
+					if (siteArray.length < 24) {
+						bookmarkInfo.textContent = "Limit of 25 bookmarks";
+						bookmarkInfo.className = "";
+					}
+				};
+				const div = document.createElement("div");
+				div.append(href);
+				div.append(btn);
+				bookmarksDIV.append(div);
+				if (bookmarksDIV.childElementCount == siteArray.length)
+					loading.style.display = "none";
+			}
+		}
+
+		function addBookmark() {
+			addBookmarkBtn.style.display = "none";
+			bookmarkInput.style.display = "";
+			bookmarkSaveBtn.style.display = "";
+			bookmarkClearBtn.style.display = "none";
+		}
+
+		function saveBookmark() {
+			let input = bookmarkInput.value;
+			if (siteArray.length < 24) {
+				if (input.startsWith("https://") || input.startsWith("http://")) {
+					if (siteArray.includes(input) === false) siteArray.push(input);
+				} else {
+					if (siteArray.includes(`https://${input}`) === false)
+						siteArray.push(`https://${input}`);
+				}
+				localStorage.setItem("_cwcbypass.bookmarks", JSON.stringify(siteArray));
+				bookmarksMain(siteArray.length - 1);
+
+				bookmarkInput.value = "";
+				addBookmarkBtn.style.display = "";
+				bookmarkInput.style.display = "none";
+				bookmarkSaveBtn.style.display = "none";
+				bookmarkSaveBtn.disabled = true;
+			} else {
+				bookmarkInfo.textContent = "Bookmarks full!";
+				bookmarkInfo.style.color = "red";
+			}
+		}
+
+		function BookmarkInput() {
+			if (bookmarkInput.value) {
+				bookmarkSaveBtn.disabled = false;
+			} else {
+				bookmarkSaveBtn.disabled = true;
+			}
+		}
+
+		function clearAllBookmark() {
+			bookmarkClearBtn.style.display = "none";
+			localStorage.removeItem("_cwcbypass.bookmarks");
+			location.reload();
+		}
+		bookmarksMain(); // load bookmarks
+	</script>
+</html>
